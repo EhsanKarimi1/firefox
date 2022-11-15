@@ -1,13 +1,3 @@
-//                       _
-//  _   _ ___  ___ _ __ (_)___
-// | | | / __|/ _ \ '__|| / __|
-// | |_| \__ \  __/ | _ | \__ \
-//  \__,_|___/\___|_|(_)/ |___/
-//                    |__/
-//                    
-//     url: https://github.com/Ehsankarimi1/user.js
-// license: https://github.com/Ehsankarimi1/user.js/blob/main/LICENSE
-
 /** INDEX: 
  *  LINE    TITLE
  *  40      STARTUP
