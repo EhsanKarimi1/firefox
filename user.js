@@ -30,6 +30,10 @@
  * **/
 
 /** STARTUP **/
+// change startup page
+user_pref("browser.startup.page", 0);
+user_pref("browser.startup.homepage", "about:blank"); // or you can change it to about:home
+user_pref("browser.newtabpage.enabled", false);
 user_pref("browser.shell.checkDefaultBrowser", false);
 user_pref("app.update.auto", false);
 // Disable Firefox account(For those who want to completely disable this feature)
@@ -37,6 +41,14 @@ user_pref("identity.fxaccounts.enabled", false);
 user_pref("browser.toolbars.bookmarks.visibility", "never");
 user_pref("browser.region.update.region", "CH");
 user_pref("browser.search.region", "CH");
+// set preferred language for displaying pages
+user_pref("intl.accept_languages", "en-US, en");
+user_pref("javascript.use_us_english_locale", true);
+//disable welcome notices 
+//user_pref("browser.startup.homepage_override.mstone", "ignore");
+//disable What's New toolbar icon
+user_pref("browser.messaging-system.whatsNewPanel.enabled", true); // you can change it to false
+
 // disable favicons in shortcuts
 // URL shortcuts use a cached randomly named .ico file which is stored in your
 // profile/shortcutCache directory. The .ico remains after the shortcut is deleted
@@ -78,6 +90,7 @@ user_pref("devtools.onboarding.telemetry.logged", false);
 user_pref("toolkit.telemetry.enabled", false);
 user_pref("toolkit.telemetry.server", "");
 user_pref("toolkit.telemetry.unified", false);
+user_pref("toolkit.telemetry.server", "data:,");
 // disable new data submission
 user_pref("datareporting.policy.dataSubmissionEnabled", false);
 // disable Health Reports
@@ -125,10 +138,26 @@ user_pref("browser.newtabpage.activity-stream.feeds.system.topstories", false);
 /************************* END OF TITLE *******************************/
 
 /** DNS / DoH / PROXY / SOCKS / IPv6 **/
-// disable IPv6:
-// Myth: I’m Not Running IPv6 so I Don’t Have to Worry
-// Reality: Your Users are Using IPv6
+// disable IPv6
+// IPv6 can be abused, especially with MAC addresses, and can leak with VPNs: assuming
+// your ISP and/or router and/or website is IPv6 capable. Most sites will fall back to IPv4
+// Firefox telemetry (Sept 2022) shows ~8% of successful connections are IPv6
+// This is an application level fallback. Disabling IPv6 is best done at an
+// OS/network level, and/or configured properly in VPN setups. If you are not masking your IP,
+// then this won't make much difference. If you are masking your IP, then it can only help.
 user_pref("network.dns.disableIPv6", true);
+//set the proxy server to do any DNS lookups when using SOCKS
+// in Tor, this stops your local DNS server from knowing your Tor destination
+// as a remote Tor node will handle the DNS request
+user_pref("network.proxy.socks_remote_dns", true);
+//disable GIO as a potential proxy bypass vector
+// Gvfs/GIO has a set of supported protocols like obex, network, archive, computer,
+// dav, cdda, gphoto2, trash, etc. By default only sftp is accepted
+user_pref("network.gio.supported-protocols", ""); //[Hidden PREF]
+// disable proxy direct failover for system requests
+// Default true is a security feature against malicious extensions
+// user_pref("network.proxy.failover_direct", false);
+
 // disable using UNC (Uniform Naming Convention) paths
 user_pref("network.file.disable_unc_paths", true);
 // disable DNS-over-HTTPS (DoH) rollout
@@ -151,6 +180,11 @@ user_pref("security.ssl3.rsa_aes_128_gcm_sha256", false); // no PFS
 user_pref("security.ssl3.rsa_aes_256_gcm_sha384", false); // no PFS
 user_pref("security.ssl3.rsa_aes_128_sha", false); // no PFS
 user_pref("security.ssl3.rsa_aes_256_sha", false); // no PFS
+
+// control TLS versions
+// Passive fingerprinting and security
+// user_pref("security.tls.version.min", 3);
+// user_pref("security.tls.version.max", 4);
 
 // disable SSL session IDs
 // because Passive fingerprinting and perf costs. These are session-only
@@ -198,7 +232,6 @@ user_pref("security.cert_pinning.enforcement_level", 2);
 user_pref("security.remote_settings.crlite_filters.enabled", true);
 user_pref("security.pki.crlite_mode", 2);
 
-
 /** MIXED CONTENT **/
 // disable insecure passive content (such as images) on https pages
 user_pref("security.mixed_content.block_display_content", true);
@@ -206,6 +239,8 @@ user_pref("security.mixed_content.block_display_content", true);
 // enable HTTPS-Only mode in all windows
 // user_pref("dom.security.https_only_mode", true);
 // user_pref("dom.security.https_only_mode_pbm", true);
+// enable HTTPS-Only mode for local resources
+// user_pref("dom.security.https_only_mode.upgrade_local", true);
 
 // disable HTTP background requests
 // When attempting to upgrade, if the server doesn't respond within 3 seconds, Firefox sends
@@ -255,6 +290,30 @@ user_pref("network.captive-portal-service.enabled", false);
 user_pref("network.connectivity-service.enabled", false);
 
 user_pref("network.cookie.lifetimePolicy", 2); // 0=keep until they expire (default), 2=keep until you close Firefox
+
+//disable SB (Safe Browsing)
+// Do this at your own risk! These are the master switches
+// Privacy & Security>Security>... Block dangerous and deceptive content ***/
+   // user_pref("browser.safebrowsing.malware.enabled", false);
+   // user_pref("browser.safebrowsing.phishing.enabled", false);
+// disable SB checks for downloads (both local lookups + remote)
+// This is the master switch for the safebrowsing.downloads* prefs (0403, 0404)
+// Privacy & Security>Security>... "Block dangerous downloads" ***/
+   // user_pref("browser.safebrowsing.downloads.enabled", false);
+// disable SafeBrowsing checks for downloads
+// To verify the safety of certain executable files, Firefox may submit some information about the
+// file, including the name, origin, size and a cryptographic hash of the contents, to the Google
+// Safe Browsing service which helps Firefox determine whether or not the file should be blocked
+// If you do not understand this, or you want this protection, then override this ***/
+// user_pref("browser.safebrowsing.downloads.remote.enabled", false);
+   // user_pref("browser.safebrowsing.downloads.remote.url", ""); // Defense-in-depth
+// disable SafeBrowsing checks for unwanted software
+// Privacy & Security>Security>... "Warn you about unwanted and uncommon software" ***/
+   // user_pref("browser.safebrowsing.downloads.remote.block_potentially_unwanted", false);
+   // user_pref("browser.safebrowsing.downloads.remote.block_uncommon", false);
+// disable "ignore this warning" on SafeBrowsing warnings
+// If clicked, it bypasses the block for that session. This is a means for admins to enforce SB
+   // user_pref("browser.safebrowsing.allowOverride", false);
 /************************* END OF TITLE *******************************/
 
 /** PLUGINS / MEDIA / WEBRTC / WEBGL **/
@@ -345,6 +404,11 @@ user_pref("extensions.postDownloadThirdPartyPrompt", false);
 // disable webextension restrictions on certain mozilla domains
 // https://bugzilla.mozilla.org/buglist.cgi?bug_id=1384330,1406795,1415644,1453988 ***/
 // user_pref("extensions.webextensions.restrictedDomains", ""); //(defult: accounts-static.cdn.mozilla.net,accounts.firefox.com,addons.cdn.mozilla.net,addons.mozilla.org,api.accounts.firefox.com,content.cdn.mozilla.net,discovery.addons.mozilla.org,install.mozilla.org,oauth.accounts.firefox.com,profile.accounts.firefox.com,support.mozilla.org,sync.services.mozilla.com)
+
+// disable System Add-on updates
+// It can compromise security. System addons ship with prefs, use those
+// user_pref("extensions.systemAddon.update.enabled", false);
+// user_pref("extensions.systemAddon.update.url", "");
 /************************* END OF TITLE *******************************/
 
 /** TAB CONTAINERS **/
@@ -365,6 +429,10 @@ user_pref("browser.ssl_override_behavior", 1);
 // only works when it's possible to add an exception
 // it doesn't work for HSTS discrepancies
 user_pref("browser.xul.error_pages.expert_bad_cert", true);
+
+// display warning on the padlock for "broken security" (if require_safe_negotiation is false)
+// Bug: warning padlock not indicated for subresources on a secure page!
+user_pref("security.ssl.treat_unsafe_negotiation_as_broken", true);
 /************************* END OF TITLE *******************************/
 
 /** STUDIES ***/
@@ -528,6 +596,9 @@ user_pref("browser.contentblocking.category", "strict");
 
 // enable state partitioning of service workers
 user_pref("privacy.partition.serviceWorkers", true);
+// enable APS (Always Partitioning Storage) ***/
+user_pref("privacy.partition.always_partition_third_party_non_cookie_storage", true); // Default : false
+user_pref("privacy.partition.always_partition_third_party_non_cookie_storage.exempt_sessionstorage", false); // Default : true
 
 // customize ETP settings
 user_pref("network.cookie.cookieBehavior", 5);
@@ -550,6 +621,15 @@ user_pref("privacy.clearOnShutdown.sessions", true);  // [DEFAULT: true]
 // user_pref("privacy.clearOnShutdown.siteSettings", false);
 user_pref("privacy.clearOnShutdown.offlineApps", true); 
 // user_pref("privacy.clearOnShutdown.cookies", true); // Cookies
+
+// set Session Restore to clear on shutdown
+// Not needed if Session Restore is not used or it is already cleared with history
+// If true, this prevents resuming from crashes
+   // user_pref("privacy.clearOnShutdown.openWindows", true);
+
+// set cache to clear on exit
+// We already disable disk cache and clear on exit which is more robust
+   // user_pref("privacy.clearsitedata.cache.enabled", true);
 
 user_pref("privacy.cpd.cache", true);    // [DEFAULT: true]
 user_pref("privacy.cpd.formdata", true); // [DEFAULT: true]
@@ -588,6 +668,9 @@ user_pref("security.dialog_enable_delay", 1000); // [DEFAULT: 1000]
 // these are listed in about:compat
 user_pref("extensions.webcompat.enable_shims", true); // [DEFAULT: true]
 
+// enforce/reset TLS 1.0/1.1 downgrades to session only
+user_pref("security.tls.version.enable-deprecated", false);
+
 // enforce disabling of Web Compatibility Reporter
 // Web Compatibility Reporter adds a "Report Site Issue" button to send data to Mozilla
 // To prevent wasting Mozilla's time with a custom setup
@@ -597,7 +680,7 @@ user_pref("extensions.webcompat-reporter.enabled", false); // [DEFAULT: false]
 // Location-Aware Browsing, Full Screen, offline cache (appCache), Virtual Reality
 // The API state is easily fingerprintable. Geo and VR are behind prompts
 // appCache storage capability was removed in FF90. Full screen requires user interaction
-user_pref("full-screen-api.enabled", true);
+user_pref("full-screen-api.enabled", false);
 // user_pref("browser.cache.offline.enable", false);
 /************************* END OF TITLE *******************************/
 
@@ -613,7 +696,7 @@ user_pref("privacy.resistFingerprinting.block_mozAddonManager", true);
 // This is independent of RFP (4501). If you're not using RFP, or you are but
 // dislike the margins, then flip this pref, keeping in mind that it is effectively fingerprintable
 // DO NOT USE: the dimension pref is only meant for testing
-user_pref("privacy.resistFingerprinting.letterboxing", false); // [HIDDEN PREF]
+user_pref("privacy.resistFingerprinting.letterboxing", false); // [HIDDEN PREF] 
 // user_pref("privacy.resistFingerprinting.letterboxing.dimensions", ""); // [HIDDEN PREF]
 
 // experimental RFP
@@ -655,6 +738,10 @@ user_pref("browser.link.open_newwindow.restriction", 0);
 user_pref("privacy.resistFingerprinting", true);
 // Change cookie behaviors(Isolating cookies and other stored information to the first party domain prevents cross-site tracking.)
 user_pref("privacy.firstparty.isolate", true);
+
+// set new window size rounding max values
+user_pref("privacy.window.maxInnerWidth", 1600); // Default : 1000
+user_pref("privacy.window.maxInnerHeight", 900); // Default : 1000
 
 /***
    RFP covers a wide range of ongoing fingerprinting solutions.
@@ -725,8 +812,19 @@ user_pref("privacy.firstparty.isolate", true);
 // Saved logins and passwords are not available. Reset the pref and restart to return them
 // user_pref("security.nocertdb", true); 
 
+// disable favicons in history and bookmarks
+//Stored as data blobs in favicons.sqlite, these don't reveal anything that your
+//actual history (and bookmarks) already do. Your history is more detailed, so
+// control that instead; e.g. disable history, clear history on exit, use PB mode
+// favicons.sqlite is sanitized on Firefox close
+   // user_pref("browser.chrome.site_icons", false);
+
 // exclude "Undo Closed Tabs" in Session Restore
 // user_pref("browser.sessionstore.max_tabs_undo", 0);
+
+// disable resuming session from crash
+// for test use this command about:crashparent
+// user_pref("browser.sessionstore.resume_from_crash", false);
 
 // disable "open with" in download dialog
 // Application data isolation
@@ -773,6 +871,9 @@ user_pref("dom.disable_beforeunload", false);
 // prevent websites to know history of your clipboard
 // {https://www.ghacks.net/2022/08/27/websites-may-write-to-the-clipboard-in-chrome-without-user-permission/} , {https://webplatform.news/}
 user_pref("dom.event.clipboardevents.enabled", false);
+// disable website control over browser right-click context menu
+// Just use Shift-Right-Click
+user_pref("dom.event.contextmenu.enabled", false);
 
 // block popup windows
 // Privacy & Security>Permissions>Block pop-up windows
@@ -868,6 +969,13 @@ user_pref("privacy.donottrackheader.enabled", true);
 // Not recommended. Overriding these can cause breakage and performance issues,
 // they are mostly fingerprintable, and the threat model is practically nonexistent
 
+// disable MathML (Mathematical Markup Language)
+// user_pref("mathml.disabled", true);
+// disable in-content SVG (Scalable Vector Graphics)
+// user_pref("svg.disabled", true);
+// disable graphite
+// user_pref("gfx.font_rendering.graphite.enabled", false);
+
 // disable asm.js
 // user_pref("javascript.options.asmjs", false);
 
@@ -880,6 +988,11 @@ user_pref("privacy.donottrackheader.enabled", true);
 
 // disable WebAssembly
 // user_pref("javascript.options.wasm", false);
+// disable rendering of SVG OpenType fonts
+// user_pref("gfx.font_rendering.opentype_svg.enabled", false);
+
+//disable SHA-1 certificates
+// user_pref("security.pki.sha1_enforcement_level", 1);
 /************************* END OF TITLE *******************************/
 
 
