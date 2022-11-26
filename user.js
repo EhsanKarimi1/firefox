@@ -680,7 +680,7 @@ user_pref("extensions.webcompat-reporter.enabled", false); // [DEFAULT: false]
 // Location-Aware Browsing, Full Screen, offline cache (appCache), Virtual Reality
 // The API state is easily fingerprintable. Geo and VR are behind prompts
 // appCache storage capability was removed in FF90. Full screen requires user interaction
-user_pref("full-screen-api.enabled", false);
+user_pref("full-screen-api.enabled", true);
 // user_pref("browser.cache.offline.enable", false);
 /************************* END OF TITLE *******************************/
 
