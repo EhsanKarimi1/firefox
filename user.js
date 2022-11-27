@@ -90,7 +90,8 @@ user_pref("devtools.onboarding.telemetry.logged", false);
 user_pref("toolkit.telemetry.enabled", false);
 user_pref("toolkit.telemetry.server", "");
 user_pref("toolkit.telemetry.unified", false);
-user_pref("toolkit.telemetry.server", "data:,");
+user_pref("toolkit.telemetry.previousBuildID", "")
+user_pref("toolkit.telemetry.cachedClientID", "")
 // disable new data submission
 user_pref("datareporting.policy.dataSubmissionEnabled", false);
 // disable Health Reports
@@ -289,7 +290,10 @@ user_pref("network.captive-portal-service.enabled", false);
 // disable Network Connectivity checks
 user_pref("network.connectivity-service.enabled", false);
 
-user_pref("network.cookie.lifetimePolicy", 2); // 0=keep until they expire (default), 2=keep until you close Firefox
+user_pref("network.cookie.cookieBehavior", 1) // 0=All cookies are allowed. (Default), 1=Only cookies from the originating server are allowed. 2=No cookies are allowed. 3=Third-party cookies are allowed only if that site has stored cookies already from a previous visit (Firefox 22.0 and SeaMonkey 2.19 and later) (obsolete) Cookies are allowed based on the cookie P3P policy 
+user_pref("network.cookie.lifetimePolicy", 2); // 0=keep until they expire (default), 1=The user is prompted for the cookie's lifetime. ,2=keep until you close Firefox ,3=The cookie lasts for the number of days specified by network.cookie.lifetime.days.
+user_pref("network.cookie.lifetime.days", 1)
+
 
 //disable SB (Safe Browsing)
 // Do this at your own risk! These are the master switches
