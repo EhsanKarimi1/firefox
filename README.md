@@ -1,12 +1,12 @@
-- # config firefox  
--  
+# config firefox  
+ 
 <dl><img src="https://www.mozilla.org/media/protocol/img/logos/firefox/browser/og.4ad05d4125a5.png" style="border-radius:18px"></dl>
-- 1) Download firefox from origin website with this link:  
+1) Download firefox from origin website with this link:  
   [Firefox website](https://www.mozilla.org/en-US/firefox/download/thanks/ "Firefox origin website")  
   or you can download it from this address:  
   [Mozilla FTP server](https://ftp.mozilla.org/pub/firefox/releases/ "Mozilla FTP server")  
   find release do you want and download it.  
-- ### first solution  
+### first solution  
   after downloading Firefox and you should decompress file so you can use this command:  
   ``` sh
   tar -xvf firefox-[release number].tar.bz2
@@ -22,6 +22,6 @@
   mv user.js test | mv test/user.js . | rm -rf test
   ```
   after all of this enjoy.  
-- ### second solution  
+### second solution  
   open the Firefox and put this `about:support` in your address bar. after page showed find Profile Directory in there and click on Open Directory. this is your profile directory and all of your setting will be there, after all of this put `user.js` file in this directory and close Firefox and rerun it, enjoy.  
   
