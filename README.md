@@ -1,6 +1,6 @@
 # config firefox  
  
-![Firefox Browser](https://www.mozilla.org/media/protocol/img/logos/firefox/browser/og.4ad05d4125a5.png)
+![Firefox Browser](https://raw.githubusercontent.com/EhsanKarimi1/user.js/main/banner.png)
 
 1) Download firefox from origin website with this link:  
 [Firefox website](https://www.mozilla.org/en-US/firefox/download/thanks/ "Firefox origin website")  
