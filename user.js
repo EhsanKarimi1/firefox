@@ -90,8 +90,8 @@ user_pref("devtools.onboarding.telemetry.logged", false);
 user_pref("toolkit.telemetry.enabled", false);
 user_pref("toolkit.telemetry.server", "");
 user_pref("toolkit.telemetry.unified", false);
-user_pref("toolkit.telemetry.previousBuildID", "")
-user_pref("toolkit.telemetry.cachedClientID", "")
+user_pref("toolkit.telemetry.previousBuildID", "");
+user_pref("toolkit.telemetry.cachedClientID", "");
 // disable new data submission
 user_pref("datareporting.policy.dataSubmissionEnabled", false);
 // disable Health Reports
@@ -166,7 +166,7 @@ user_pref("network.trr.mode", 5);// 0=off by default, 2=TRR (Trusted Recursive R
 user_pref("network.proxy.no_proxies_on", "");
 user_pref("doh-rollout.home-region", "CH");
 user_pref("network.trr.uri", "");
-user_pref("network.trr.default_provider_uri", "https://mozilla.cloudflare-dns.com/dns-query")
+user_pref("network.trr.default_provider_uri", "https://mozilla.cloudflare-dns.com/dns-query");
 /************************* END OF TITLE *******************************/
 
 /** HTTPS (SSL/TLS / OCSP / CERTS / HPKP) **/
@@ -290,9 +290,9 @@ user_pref("network.captive-portal-service.enabled", false);
 // disable Network Connectivity checks
 user_pref("network.connectivity-service.enabled", false);
 
-user_pref("network.cookie.cookieBehavior", 1) // 0=All cookies are allowed. (Default), 1=Only cookies from the originating server are allowed. 2=No cookies are allowed. 3=Third-party cookies are allowed only if that site has stored cookies already from a previous visit (Firefox 22.0 and SeaMonkey 2.19 and later) (obsolete) Cookies are allowed based on the cookie P3P policy 
+user_pref("network.cookie.cookieBehavior", 1); // 0=All cookies are allowed. (Default), 1=Only cookies from the originating server are allowed. 2=No cookies are allowed. 3=Third-party cookies are allowed only if that site has stored cookies already from a previous visit (Firefox 22.0 and SeaMonkey 2.19 and later) (obsolete) Cookies are allowed based on the cookie P3P policy 
 user_pref("network.cookie.lifetimePolicy", 2); // 0=keep until they expire (default), 1=The user is prompted for the cookie's lifetime. ,2=keep until you close Firefox ,3=The cookie lasts for the number of days specified by network.cookie.lifetime.days.
-user_pref("network.cookie.lifetime.days", 1)
+user_pref("network.cookie.lifetime.days", 1);
 
 
 //disable SB (Safe Browsing)
@@ -543,7 +543,7 @@ user_pref("browser.pagethumbnails.capturing_disabled", true);
 
 // disable UITour backend so there is no chance that a remote page can use it
 user_pref("browser.uitour.enabled", false);
-user_pref("browser.uitour.url", ""); (defult: https://www.mozilla.org/%LOCALE%/firefox/%VERSION%/tour/)
+user_pref("browser.uitour.url", ""); //(defult: https://www.mozilla.org/%LOCALE%/firefox/%VERSION%/tour/)
 
 // disable various developer tools in browser context
 // -->Devtools>Advanced Settings>Enable browser chrome and add-on debugging toolboxes
@@ -841,7 +841,7 @@ user_pref("browser.urlbar.suggest.history", true);
 user_pref("browser.urlbar.suggest.bookmark", true);
 user_pref("browser.urlbar.suggest.openpage", true);
 user_pref("browser.urlbar.suggest.topsites", false);
-user_pref("browser.urlbar.suggest.engines", false)
+user_pref("browser.urlbar.suggest.engines", false);
 // disable location bar dropdown
 // This value controls the total number of entries to appear in the location bar dropdown
 user_pref("browser.urlbar.maxRichResults", 10);
@@ -935,7 +935,7 @@ user_pref("browser.discovery.enabled", false);
 // alt-svc allows separation of transport routing from the origin host without using a proxy.
 // AltSvc enables so-called opportunistic (unauthenticated) encryption
 user_pref("network.http.altsvc.enabled", false);
-user_pref("network.http.altsvc.oe", false); {defult: false}
+user_pref("network.http.altsvc.oe", false); //{defult: false}
 
 // enable the DNT (Do Not Track) HTTP header
 user_pref("privacy.donottrackheader.enabled", true);
