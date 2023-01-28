@@ -1,0 +1,88 @@
+/* functions */
+@import url("functions/cleaner_extensions_menu.css");
+@import url("functions/firefox_view_icon_change.css");
+@import url("functions/no_search_engines_in_url_bar.css");
+@import url("functions/privacy_blur_email_in_main_menu.css");
+@import url("functions/privacy_blur_email_in_sync_menu.css");
+@import url("functions/privacy_blur_tabs_content.css");
+@import url("functions/ublock-icon-change.css");
+@import url("functions/white_github_icon_in_bookmarks.css");
+@import url("functions/hide_list-all-tabs_button.css");
+@import url("functions/icons_in_main_menu.css");
+
+:root {
+	--firefoxcss-top-bar-border-bottom-size: 0px;
+}
+
+/* Remove line on the right side of the Firefox view button */
+:root:not([privatebrowsingmode="temporary"]):not([firefoxviewhidden])
+  :is(#firefox-view-button, #wrapper-firefox-view-button)
+  + #tabbrowser-tabs {
+  border-inline-start: 0 !important;
+}
+
+/* Remove line between website content and top bar */
+#navigator-toolbox {
+  border-bottom: var(--firefoxcss-top-bar-border-bottom-size) solid
+    var(--firefoxcss-top-bar-border-bottom-color) !important;
+}
+
+/* Bars Icons */
+#PanelUI-menu-button {
+  list-style-image: url(images/firefox.svg) !important;
+}
+
+#forward-button {
+  list-style-image: url(images/right-arrow.svg) !important;
+}
+
+#back-button {
+  list-style-image: url(images/left-arrow.svg) !important;
+}
+
+#PanelUI-button {
+  margin-inline-start: 0 !important;
+  padding-inline-start: 0 !important;
+  border: none !important;
+  border-inline-start: none !important;
+}
+
+#back-button > .toolbarbutton-icon {
+  border: none !important;
+  border-radius: 0 !important;
+  background: none !important;
+  width: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
+  height: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
+  padding: var(--toolbarbutton-inner-padding) !important;
+  border-radius: var(--toolbarbutton-border-radius) !important;
+}
+
+/* Private browser icons remove and change main menu to purple */
+#private-browsing-indicator-with-label,
+.private-browsing-indicator {
+  display: none !important;
+}
+
+:root[privatebrowsingmode="temporary"] #PanelUI-menu-button {
+  list-style-image: url("images/firefox.svg") !important;
+  fill: hsl(277, 70%, 64%) !important;
+}
+
+/* Back button hover/active color */
+#back-button:not([disabled]):not([open]):hover > .toolbarbutton-icon {
+  background-color: var(--toolbarbutton-hover-background) !important;
+}
+
+#back-button:not([disabled="true"]):is([open], [checked], :hover:active)
+  > .toolbarbutton-icon {
+  background-color: var(--toolbarbutton-active-background) !important;
+}
+
+/* inside url bar */
+#search-container #searchbar .search-go-button {
+  list-style-image: url("images/right-arrow.svg") !important;
+}
+
+#urlbar-go-button {
+  list-style-image: url("images/right-arrow.svg") !important;
+}
