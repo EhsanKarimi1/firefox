@@ -331,7 +331,7 @@ user_pref("network.cookie.lifetime.days", 1);
 // file, including the name, origin, size and a cryptographic hash of the contents, to the Google
 // Safe Browsing service which helps Firefox determine whether or not the file should be blocked
 // If you do not understand this, or you want this protection, then override this ***/
-user_pref("browser.safebrowsing.downloads.remote.enabled", false);
+// user_pref("browser.safebrowsing.downloads.remote.enabled", false);
    // user_pref("browser.safebrowsing.downloads.remote.url", ""); // Defense-in-depth
 // disable SafeBrowsing checks for unwanted software
 // Privacy & Security>Security>... "Warn you about unwanted and uncommon software" ***/
@@ -666,7 +666,7 @@ user_pref("privacy.clearOnShutdown.history", true);   // [DEFAULT: true]
 user_pref("privacy.clearOnShutdown.sessions", true);  // [DEFAULT: true]
 // user_pref("privacy.clearOnShutdown.siteSettings", false);
 user_pref("privacy.clearOnShutdown.offlineApps", true); 
-user_pref("privacy.clearOnShutdown.cookies", true); // Cookies
+// user_pref("privacy.clearOnShutdown.cookies", true); // Cookies
 
 // set Session Restore to clear on shutdown
 // Not needed if Session Restore is not used or it is already cleared with history
