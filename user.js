@@ -450,6 +450,9 @@ user_pref("privacy.userContext.newTabContainerOnLeftClick.enabled", false);
 /************************* END OF TITLE *******************************/
 
 /** UI **/
+// use userChrome.css file in firefox to change UI
+user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);
+
 // control "Add Security Exception" dialog on SSL warnings
 // 0=do neither, 1=pre-populate url, 2=pre-populate url + pre-fetch cert (default)
 user_pref("browser.ssl_override_behavior", 1);
