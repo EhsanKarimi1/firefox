@@ -1,39 +1,40 @@
 /** INDEX: 
- *  LINE    TITLE
- *  40      STARTUP
- *  57      Permissions
- *  68      Telemetry
- *  98      GEOLOCATION
- *  115     Pocket
- *  125     DNS / DoH / PROXY / SOCKS / IPv6
- *  140     HTTPS (SSL/TLS / OCSP / CERTS / HPKP)
- *  215     NETWORK(HTTP) / SECURITY
- *  258     PLUGINS / MEDIA / WEBRTC
- *  292     PASSWORD / SIGNIN
- *  313     FONTS
- *  323     DOWNLOADS
- *  334     EXTENSIONS
- *  348     TAB CONTAINERS
- *  357     UI
- *  368     STUDIES
- *  378     CRASH REPORTS
- *  387     LOCATION BAR / SEARCH BAR / FORM
- *  428     DISK CACHE
- *  448     PRIVACY PREFRENCES
- *  460     MISCELLANEOUS
- *  514     ETP (ENHANCED TRACKING PROTECTION)
- *  602     RFP (RESIST FINGERPRINTING)
- *  763     DOM (DOCUMENT OBJECT MODEL)
- *  795     HEADERS / REFERERS
- *  837     FINGERPRINTING
- *  865     OPTIONAL HARDENING
+ *  TITLE
+ *  STARTUP
+ *  Permissions
+ *  Telemetry
+ *  GEOLOCATION
+ *  Pocket
+ *  DNS / DoH / PROXY / SOCKS / IPv6
+ *  HTTPS (SSL/TLS / OCSP / CERTS / HPKP)
+ *  NETWORK(HTTP) / SECURITY
+ *  PLUGINS / MEDIA / WEBRTC
+ *  PASSWORD / SIGNIN
+ *  FONTS
+ *  DOWNLOADS
+ *  EXTENSIONS
+ *  TAB CONTAINERS
+ *  UI
+ *  STUDIES
+ *  CRASH REPORTS
+ *  LOCATION BAR / SEARCH BAR / FORM
+ *  DISK CACHE
+ *  PRIVACY PREFRENCES
+ *  MISCELLANEOUS
+ *  ETP (ENHANCED TRACKING PROTECTION)
+ *  RFP (RESIST FINGERPRINTING)
+ *  DOM (DOCUMENT OBJECT MODEL)
+ *  HEADERS / REFERERS
+ *  FINGERPRINTING
+ *  OPTIONAL HARDENING
  * **/
 
 /** STARTUP **/
 // change startup page
-user_pref("browser.startup.page", 0);
-user_pref("browser.startup.homepage", "about:blank"); // or you can change it to about:home
-user_pref("browser.newtabpage.enabled", false);
+user_pref("browser.startup.page", 0); // 0=blank, 1=home, 2=last visited page, 3=resume previous session
+user_pref("browser.startup.homepage", "about:blank"); // or you can change it to about:home or custom URL
+user_pref("browser.newtabpage.enabled", false); // true=Firefox Home (default), false=blank page
+// user_pref("browser.newtab.preload", "");
 user_pref("browser.shell.checkDefaultBrowser", false);
 user_pref("app.update.auto", false);
 // Disable Firefox account(For those who want to completely disable this feature)
@@ -42,10 +43,10 @@ user_pref("browser.toolbars.bookmarks.visibility", "never");
 user_pref("browser.region.update.region", "CH");
 user_pref("browser.search.region", "CH");
 // set preferred language for displaying pages
-user_pref("intl.accept_languages", "en-US, en");
-user_pref("javascript.use_us_english_locale", true);
+user_pref("intl.accept_languages", "en-GB, en");
+user_pref("javascript.use_us_english_locale", false); // can be true
 //disable welcome notices 
-//user_pref("browser.startup.homepage_override.mstone", "ignore");
+user_pref("browser.startup.homepage_override.mstone", "ignore");
 //disable What's New toolbar icon
 user_pref("browser.messaging-system.whatsNewPanel.enabled", true); // you can change it to false
 
@@ -60,7 +61,7 @@ user_pref("browser.aboutConfig.showWarning", false);
 user_pref("browser.newtabpage.activity-stream.feeds.topsites", false);
 // disable firefox logo and search bar in Firefox Home page
 user_pref("browser.newtabpage.activity-stream.showSearch", true);
-// for just disable firefox logo use thtis
+// for just disable firefox logo use this
 user_pref("browser.newtabpage.activity-stream.logowordmark.alwaysVisible", true);
 // deactive more from mozilla in preferences
 user_pref("browser.preferences.moreFromMozilla", false);
@@ -84,8 +85,8 @@ user_pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons", fa
 user_pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features", false);
 user_pref("toolkit.telemetry.pioneer-new-studies-available", false);
 user_pref("toolkit.telemetry.reportingpolicy.firstRun", false);
-user_pref("browser.newtabpage.activity-stream.feeds.telemetry", false);
-user_pref("browser.ping-centre.telemetry", false);
+user_pref("browser.newtabpage.activity-stream.feeds.telemetry", false); // disable Firefox Home (Activity Stream) telemetry
+user_pref("browser.ping-centre.telemetry", false); // disable PingCentre telemetry (used in several System Add-ons)
 user_pref("devtools.onboarding.telemetry.logged", false);
 user_pref("toolkit.telemetry.enabled", false);
 user_pref("toolkit.telemetry.server", "");
@@ -113,14 +114,14 @@ user_pref("toolkit.coverage.endpoint.base", "");
 // Disable geolocation support(This prevents websites from accessing your location information.)
 user_pref("geo.enabled", false);
 // use Mozilla geolocation service instead of Google(https://www.googleapis.com/geolocation/v1/geolocate?key=%GOOGLE_LOCATION_SERVICE_API_KEY%) if permission is granted
-// Optionally enable logging to the console (defaults to false)
 user_pref("geo.provider.network.url", "https://location.services.mozilla.com/v1/geolocate?key=%MOZILLA_API_KEY%");
-user_pref("geo.provider.network.logging.enabled", false); // [HIDDEN PREF] *
+// Optionally enable logging to the console (defaults to false)
+user_pref("geo.provider.network.logging.enabled", false); // HIDDEN PREF
 // disable using the OS's geolocation service ***/
-user_pref("geo.provider.ms-windows-location", false); // [WINDOWS]
-user_pref("geo.provider.use_corelocation", false); // [MAC]
-user_pref("geo.provider.use_gpsd", false); // [LINUX]
-user_pref("geo.provider.use_geoclue", false); // [LINUX / firefox>+102]
+user_pref("geo.provider.ms-windows-location", false); // WINDOWS OS
+user_pref("geo.provider.use_corelocation", false); // MAC OS
+user_pref("geo.provider.use_gpsd", false); // LINUX OS
+user_pref("geo.provider.use_geoclue", false); // LINUX OS & Firefox>102
 
 user_pref("browser.region.network.url", ""); // defult address: https://location.services.mozilla.com/v1/country?key=%MOZILLA_API_KEY%
 user_pref("browser.region.update.enabled", false);
@@ -147,26 +148,44 @@ user_pref("browser.newtabpage.activity-stream.feeds.system.topstories", false);
 // OS/network level, and/or configured properly in VPN setups. If you are not masking your IP,
 // then this won't make much difference. If you are masking your IP, then it can only help.
 user_pref("network.dns.disableIPv6", true);
-//set the proxy server to do any DNS lookups when using SOCKS
+// set the proxy server to do any DNS lookups when using SOCKS
 // in Tor, this stops your local DNS server from knowing your Tor destination
 // as a remote Tor node will handle the DNS request
 user_pref("network.proxy.socks_remote_dns", true);
-//disable GIO as a potential proxy bypass vector
+// disable GIO as a potential proxy bypass vector
 // Gvfs/GIO has a set of supported protocols like obex, network, archive, computer,
 // dav, cdda, gphoto2, trash, etc. By default only sftp is accepted
 user_pref("network.gio.supported-protocols", ""); //[Hidden PREF]
 // disable proxy direct failover for system requests
 // Default true is a security feature against malicious extensions
-// user_pref("network.proxy.failover_direct", false);
+// user_pref("network.proxy.failover_direct", false); //default=true
 
 // disable using UNC (Uniform Naming Convention) paths
 user_pref("network.file.disable_unc_paths", true);
-// disable DNS-over-HTTPS (DoH) rollout
-user_pref("network.trr.mode", 5);// 0=off by default, 2=TRR (Trusted Recursive Resolver) first, 3=TRR only, 5=explicitly off
-user_pref("network.proxy.no_proxies_on", "");
-user_pref("doh-rollout.home-region", "CH");
-user_pref("network.trr.uri", "");
+
+// disable proxy bypass for system request failures [FF95+]
+// RemoteSettings, UpdateService, Telemetry [1]
+// If false, this will break the fallback for some security features
+// If you use a proxy and you understand the security impact
+   // user_pref("network.proxy.allow_bypass", false); //default=true
+
+// disable DNS-over-HTTPS (DoH) rollout (use oDoH or DoT)
+user_pref("network.trr.mode", 3);// 0=off by default, 1=lets Firefox pick whichever is faster, 2=TRR (Trusted Recursive Resolver) first, 3=TRR only, 4=Runs the TRR resolves in parallel with the native for timing and measurements but uses only the native resolver results., 5=explicitly off
+// user_pref("network.proxy.no_proxies_on", );
+// user_pref("doh-rollout.home-region", "CH");
+// user_pref("network.trr.uri", "");
 user_pref("network.trr.default_provider_uri", "https://mozilla.cloudflare-dns.com/dns-query");
+user_pref("network.trr.confirmation_telemetry_enabled", false);
+// You can configure exceptions so that Firefox uses your OS resolver instead of DoH & Add domains, separated by commas
+user_pref("network.trr.excluded-domains", "");
+
+// Enable Oblivious DNS-over-HTTPS
+// user_pref("network.trr.odoh.configs_uri", "");
+// user_pref("network.trr.odoh.enabled", false);
+// user_pref("network.trr.odoh.min_ttl", 60);
+// user_pref("network.trr.odoh.proxy_uri", "");
+// user_pref("network.trr.odoh.target_host", "");
+// user_pref("network.trr.odoh.target_path", "");
 /************************* END OF TITLE *******************************/
 
 /** HTTPS (SSL/TLS / OCSP / CERTS / HPKP) **/
@@ -192,7 +211,7 @@ user_pref("security.ssl3.rsa_aes_256_sha", false); // no PFS
 // and isolated with network partitioning and/or containers
 user_pref("security.ssl.disable_session_identifiers", true);
 
-// require safe negotiation (for check the connection is safe of we have MITM attack)
+// require safe negotiation (for check the connection is safe of we have MITM attack) [SSL_ERROR_UNSAFE_NEGOTIATION]
 user_pref("security.ssl.require_safe_negotiation", true);
 
 // disable TLS1.3 0-RTT (round-trip time)
@@ -201,10 +220,13 @@ user_pref("security.ssl.require_safe_negotiation", true);
 user_pref("security.tls.enable_0rtt_data", false);
 
 /** OCSP (Online Certificate Status Protocol) **/
+// https://scotthelme.co.uk/revocation-is-broken/
+// https://scotthelme.co.uk/ocsp-stapling-speeding-up-ssl/
 // enforce OCSP fetching to confirm current validity of certificates
+// 0=disabled, 1=enabled (default), 2=enabled for EV certificates only
 user_pref("security.OCSP.enabled", 1);
 
-// set OCSP fetch failures to hard-fail
+// set OCSP fetch failures to hard-fail [SEC_ERROR_OCSP_SERVER_ERROR]
 // When a CA cannot be reached to validate a cert, Firefox just continues the connection (=soft-fail)
 // Setting this pref to true tells Firefox to instead terminate the connection (=hard-fail)
 // It is pointless to soft-fail when an OCSP fetch fails: you cannot confirm a cert is still valid (it
@@ -251,9 +273,9 @@ user_pref("dom.security.https_only_mode_send_http_background_request", false);
 /************************* END OF TITLE *******************************/
 
 /** NETWORK(HTTP) / SECURITY **/
-// Disable prefetching
+// Disable DNS prefetching
 user_pref("network.dns.disablePrefetch", true);
-// user_pref("network.dns.disablePrefetchFromHTTPS", true);
+user_pref("network.dns.disablePrefetchFromHTTPS", true);
 
 // Disable link prefetching
 user_pref("network.prefetch-next", false);
@@ -265,10 +287,10 @@ user_pref("network.http.speculative-parallel-limit", 0);
 // disable mousedown speculative connections on bookmarks and history
 user_pref("browser.places.speculativeConnect.enabled", false);
 // enforce no "Hyperlink Auditing"
-// user_pref("browser.send_pings", false);
+// user_pref("browser.send_pings", false); // DEFAULT: false
 
 // disable HTTP2 - replaced by network.http.http2* prefs
-// [WHY] Passive fingerprinting. ~50% of sites use HTTP2 [1]
+// [WHY] Passive fingerprinting. ~50% of sites use HTTP2
 user_pref("network.http.spdy.enabled", false);
 user_pref("network.http.spdy.enabled.deps", false);
 user_pref("network.http.spdy.enabled.http2", false);
@@ -282,7 +304,7 @@ user_pref("network.http.spdy.websockets", false);
 user_pref("security.csp.enable", true);
 user_pref("app.update.background.scheduling.enabled", false);
 user_pref("extensions.screenshots.disabled", true);
-user_pref("extensions.getAddons.cache.enabled", false); // disable extension metadata (extension detail tab) *
+user_pref("extensions.getAddons.cache.enabled", false); // disable extension metadata (extension detail tab)
 
 // disable Captive Portal detection (Why ---> https://www.eff.org/deeplinks/2017/08/how-captive-portals-interfere-wireless-security-and-privacy)
 user_pref("captivedetect.canonicalURL", "");//(http://detectportal.firefox.com/canonical.html)
@@ -309,7 +331,7 @@ user_pref("network.cookie.lifetime.days", 1);
 // file, including the name, origin, size and a cryptographic hash of the contents, to the Google
 // Safe Browsing service which helps Firefox determine whether or not the file should be blocked
 // If you do not understand this, or you want this protection, then override this ***/
-// user_pref("browser.safebrowsing.downloads.remote.enabled", false);
+user_pref("browser.safebrowsing.downloads.remote.enabled", false);
    // user_pref("browser.safebrowsing.downloads.remote.url", ""); // Defense-in-depth
 // disable SafeBrowsing checks for unwanted software
 // Privacy & Security>Security>... "Warn you about unwanted and uncommon software" ***/
@@ -322,6 +344,7 @@ user_pref("network.cookie.lifetime.days", 1);
 
 /** PLUGINS / MEDIA / WEBRTC / WEBGL **/
 // webRTC disable
+// Firefox desktop uses mDNS hostname obfuscation and the private IP is never exposed until
 // To disable RTCPeerConnection and protect IP addresses leakage
 user_pref("media.peerconnection.enabled", false);
 // To disable Media Devices
@@ -360,7 +383,7 @@ user_pref("signon.management.page.breach-alerts.enabled", false);
 user_pref("signon.rememberSignons", false);
 
 // disable auto-filling username & password form fields
-user_pref("signon.autofillForms", false);
+user_pref("signon.autofillForms", false); // can leak in cross-site forms *and* be spoofed
 // disable formless login capture for Password Manager
 user_pref("signon.formlessCapture.enabled", false);
 
@@ -400,6 +423,8 @@ user_pref("browser.download.always_ask_before_handling_new_types", true);
 // lock down allowed extension directories
 // This will break extensions, language packs, themes and any other
 // XPI files which are installed outside of profile and application directories
+// https://mike.kaply.com/2012/02/21/understanding-add-on-scopes/
+// https://archive.is/DYjAM (archived)
 user_pref("extensions.enabledScopes", 5);
 user_pref("extensions.autoDisableScopes", 15);
 // disable bypassing 3rd party extension install prompts
@@ -455,21 +480,21 @@ user_pref("breakpad.reportURL", ""); //(defult: https://crash-stats.mozilla.org/
 user_pref("browser.tabs.crashReporting.sendReport", false);
 user_pref("browser.crashReports.unsubmittedCheck.enabled", false);
 // enforce no submission of backlogged Crash Reports
-user_pref("browser.crashReports.unsubmittedCheck.autoSubmit2", false); // [DEFAULT: false]
+user_pref("browser.crashReports.unsubmittedCheck.autoSubmit2", false); // DEFAULT: false
 /************************* END OF TITLE *******************************/
 
 /** LOCATION BAR / SEARCH BAR / FORM **/
 // Don't leak URL typos to a search engine, give an error message instead
 // Override this if you trust and use a privacy respecting search engine
-user_pref("keyword.enabled", true);
+user_pref("keyword.enabled", false);
 
-// disable location bar domain guessing
+// disable location bar domain guessing (can leak sensitive data)
 user_pref("browser.fixup.alternate.enabled", false);
 
-// disable live search suggestions
-user_pref("browser.urlbar.suggest.searches", false); // [provide search suggestion] is enable but [show search suggestion in address bar result] is disable
+// disable live search suggestions (Both must be true for the location bar to work)
 // Override these if you trust and use a privacy respecting search engine
-user_pref("browser.search.suggest.enabled", false); // disable the [provide search suggestion]
+user_pref("browser.urlbar.suggest.searches", false); 
+user_pref("browser.search.suggest.enabled", false);
 
 // disable location bar making speculative connections
 user_pref("browser.urlbar.speculativeConnect.enabled", false);
@@ -490,13 +515,22 @@ user_pref("browser.formfill.enable", false);
 
 // disable Form Autofill
 user_pref("extensions.formautofill.addresses.enabled", false);
+user_pref("extensions.formautofill.addresses.supported", "");
+user_pref("extensions.formautofill.addresses.supportedCountries", "");
 user_pref("extensions.formautofill.available", "off");
 user_pref("extensions.formautofill.creditCards.available", false);
+user_pref("extensions.formautofill.creditCards.supported", "");
+user_pref("extensions.formautofill.creditCards.supportedCountries", "");
 user_pref("extensions.formautofill.creditCards.enabled", false);
 user_pref("extensions.formautofill.heuristics.enabled", false);
 
+
+// disable seach terms
+// Search > SearchBar > Use the address bar for search and navigation > Show search terms instead of URL...
+user_pref("browser.urlbar.showSearchTerms.enabled", false);
+
 // disable coloring of visited links
-// user_pref("layout.css.visited_links_enabled", false);
+user_pref("layout.css.visited_links_enabled", false);
 /************************* END OF TITLE *******************************/
 
 /** DISK CACHE **/
@@ -508,7 +542,7 @@ user_pref("extensions.formautofill.heuristics.enabled", false);
 // disable media cache from writing to disk in Private Browsing
 // MSE (Media Source Extensions) are already stored in-memory in PB
 user_pref("browser.privatebrowsing.forceMediaMemoryCache", true);
-//user_pref("media.memory_cache_max_size", 65536);
+user_pref("media.memory_cache_max_size", 65536);
 
 // disable storing extra session data
 // define on which sites to save extra session data such as form content, cookies and POST data
@@ -516,7 +550,7 @@ user_pref("browser.privatebrowsing.forceMediaMemoryCache", true);
 user_pref("browser.sessionstore.privacy_level", 2);
 
 // disable automatic Firefox start and session restore after reboot
-// user_pref("toolkit.winRegisterApplicationRestart", false);
+user_pref("toolkit.winRegisterApplicationRestart", false);
 /************************* END OF TITLE *******************************/
 
 /** PRIVACY PREFRENCES */
@@ -533,7 +567,8 @@ user_pref("privacy.globalprivacycontrol.was_ever_enabled", true);
 
 /** MISCELLANEOUS **/
 // prevent accessibility services from accessing your browser
-user_pref("accessibility.force_disabled", 1);
+// https://support.mozilla.org/en-US/kb/accessibility-services
+user_pref("accessibility.force_disabled", 1); // 0 == false, 1 == true
 // disable sending additional analytics to web servers
 user_pref("beacon.enabled", false);
 // remove temp files opened with an external application
@@ -557,8 +592,8 @@ user_pref("middlemouse.contentLoadURL", false);
 
 //disable websites overriding Firefox's keyboard shortcuts [FF58+]
 // 0 (default) or 1=allow, 2=block
-//to add site exceptions: Ctrl+I>Permissions>Override Keyboard Shortcuts
-   // user_pref("permissions.default.shortcuts", 2);
+// to add site exceptions: Ctrl+I>Permissions>Override Keyboard Shortcuts
+// user_pref("permissions.default.shortcuts", 2);
 
 // remove special permissions for certain mozilla domains
 user_pref("permissions.manager.defaultsUrl", ""); //defult: resource://app/defaults/permissions
@@ -575,8 +610,8 @@ user_pref("pdfjs.disabled", false);
 // Disable JavaScript in PDF(To disable JavaScript support in PDF)
 user_pref("pdfjs.enableScripting", false); 
 
-// disable links launching Windows Store on Windows 8/8.1/10
-// user_pref("network.protocol-handler.external.ms-windows-store", false);
+// disable links launching Windows Store on Windows 8/8.1/10 (search it by yourself in windows store)
+user_pref("network.protocol-handler.external.ms-windows-store", false);
 
 //disable permissions delegation
 // Currently applies to cross-origin geolocation, camera, mic and screen-sharing
@@ -596,11 +631,15 @@ user_pref("browser.contentblocking.category", "strict");
 // disable ETP web compat features
 // Includes skip lists, heuristics (SmartBlock) and automatic grants
 // Opener and redirect heuristics are granted for 30 days, see
-  // user_pref("privacy.antitracking.enableWebcompat", false);
+// user_pref("privacy.antitracking.enableWebcompat", false);
 
 // enable state partitioning of service workers
 user_pref("privacy.partition.serviceWorkers", true);
-// enable APS (Always Partitioning Storage) ***/
+// disable service workers
+// Already isolated with TCP
+// user_pref("dom.serviceWorkers.enabled", false);
+
+// enable APS (Always Partitioning Storage)
 user_pref("privacy.partition.always_partition_third_party_non_cookie_storage", true); // Default : false
 user_pref("privacy.partition.always_partition_third_party_non_cookie_storage.exempt_sessionstorage", false); // Default : true
 
@@ -624,7 +663,7 @@ user_pref("privacy.clearOnShutdown.history", true);   // [DEFAULT: true]
 user_pref("privacy.clearOnShutdown.sessions", true);  // [DEFAULT: true]
 // user_pref("privacy.clearOnShutdown.siteSettings", false);
 user_pref("privacy.clearOnShutdown.offlineApps", true); 
-// user_pref("privacy.clearOnShutdown.cookies", true); // Cookies
+user_pref("privacy.clearOnShutdown.cookies", true); // Cookies
 
 // set Session Restore to clear on shutdown
 // Not needed if Session Restore is not used or it is already cleared with history
@@ -633,7 +672,7 @@ user_pref("privacy.clearOnShutdown.offlineApps", true);
 
 // set cache to clear on exit
 // We already disable disk cache and clear on exit which is more robust
-   // user_pref("privacy.clearsitedata.cache.enabled", true);
+user_pref("privacy.clearsitedata.cache.enabled", true);
 
 user_pref("privacy.cpd.cache", true);    // [DEFAULT: true]
 user_pref("privacy.cpd.formdata", true); // [DEFAULT: true]
@@ -663,6 +702,7 @@ user_pref("extensions.blocklist.enabled", true); // [DEFAULT: true]
 
 // enforce no referer spoofing
 // Spoofing can affect CSRF (Cross-Site Request Forgery) protections
+// true = send the target URL as the referrer
 user_pref("network.http.referer.spoofSource", false); // [DEFAULT: false]
 
 // enforce a security delay on some confirmation dialogs such as install, open/save
@@ -747,7 +787,7 @@ user_pref("privacy.firstparty.isolate", true);
 user_pref("privacy.window.maxInnerWidth", 1600); // Default : 1000
 user_pref("privacy.window.maxInnerHeight", 900); // Default : 1000
 
-/***
+/**
    RFP covers a wide range of ongoing fingerprinting solutions.
    It is an all-or-nothing buy in: you cannot pick and choose what parts you want
 
@@ -797,7 +837,7 @@ user_pref("privacy.window.maxInnerHeight", 900); // Default : 1000
     531915 - use fdlibm's sin, cos and tan in jsmath
    1756280 - enforce navigator.pdfViewerEnabled as true and plugins/mimeTypes as hard-coded values
    1692609 - reduce JS timing precision to 16.67ms
-***/
+**/
 
 /** OPTIONAL OPSEC (Disk avoidance, application data isolation, eyeballs...) **/
 // start Firefox in PB (Private Browsing) mode
@@ -809,7 +849,8 @@ user_pref("privacy.window.maxInnerHeight", 900); // Default : 1000
 // user_pref("browser.cache.memory.capacity", 0);
 
 // disable permissions manager from writing to disk
-// user_pref("permissions.memory_only", true);
+// This means any permission changes are session only
+user_pref("permissions.memory_only", true);
 
 // disable intermediate certificate caching
 // This affects login/cert/key dbs. The effect is all credentials are session-only.
@@ -817,11 +858,11 @@ user_pref("privacy.window.maxInnerHeight", 900); // Default : 1000
 // user_pref("security.nocertdb", true); 
 
 // disable favicons in history and bookmarks
-//Stored as data blobs in favicons.sqlite, these don't reveal anything that your
-//actual history (and bookmarks) already do. Your history is more detailed, so
+// Stored as data blobs in favicons.sqlite, these don't reveal anything that your
+// actual history (and bookmarks) already do. Your history is more detailed, so
 // control that instead; e.g. disable history, clear history on exit, use PB mode
 // favicons.sqlite is sanitized on Firefox close
-   // user_pref("browser.chrome.site_icons", false);
+// user_pref("browser.chrome.site_icons", false);
 
 // exclude "Undo Closed Tabs" in Session Restore
 // user_pref("browser.sessionstore.max_tabs_undo", 0);
@@ -834,12 +875,12 @@ user_pref("privacy.window.maxInnerHeight", 900); // Default : 1000
 // Application data isolation
 user_pref("browser.download.forbid_open_with", true);
 
-/*******************************This options are up to you*************************************/
+/****************************** This options are up to you ************************************/
 // disable location bar suggestion types
 // Privacy & Security>Address Bar>When using the address bar, suggest
 user_pref("browser.urlbar.suggest.history", true);
 user_pref("browser.urlbar.suggest.bookmark", true);
-user_pref("browser.urlbar.suggest.openpage", true);
+user_pref("browser.urlbar.suggest.openpage", false);
 user_pref("browser.urlbar.suggest.topsites", false);
 user_pref("browser.urlbar.suggest.engines", false);
 // disable location bar dropdown
@@ -870,14 +911,14 @@ user_pref("browser.download.folderList", 1);
 user_pref("dom.disable_beforeunload", false);
 
 // prevent scripts from moving and resizing open windows
-//user_pref("dom.disable_window_move_resize", true);
+user_pref("dom.disable_window_move_resize", true);
 
-// prevent websites to know history of your clipboard
+// prevent websites to know history of your clipboard (disable Clipboard API)
 // {https://www.ghacks.net/2022/08/27/websites-may-write-to-the-clipboard-in-chrome-without-user-permission/} , {https://webplatform.news/}
 user_pref("dom.event.clipboardevents.enabled", false);
 // disable website control over browser right-click context menu
 // Just use Shift-Right-Click
-user_pref("dom.event.contextmenu.enabled", false);
+user_pref("dom.event.contextmenu.enabled", true);
 
 // block popup windows
 // Privacy & Security>Permissions>Block pop-up windows
@@ -888,20 +929,25 @@ user_pref("dom.popup_allowed_events", "click dblclick mousedown pointerdown"); /
 // disable service workers
 // user_pref("dom.serviceWorkers.enabled", false);
 
-// disable Web Notifications
+// disable Web Notifications (Web Notifications are behind a prompt)
 // user_pref("dom.webnotifications.enabled", false);
 // user_pref("dom.webnotifications.serviceworker.enabled", false);
 
 // disable Push Notifications
-// user_pref("dom.push.enabled", false);
+// Push requires subscription
+// To remove all subscriptions, reset "dom.push.userAgentID"
+user_pref("dom.push.enabled", false);
+user_pref("dom.push.userAgentID", "")
 
 user_pref("dom.vr.enabled", false);
 user_pref("dom.storage.next_gen", true);
 /************************* END OF TITLE *******************************/
 
 /** HEADERS / REFERERS **/
-// control when to send a cross-origin referer
-// 0=always (default), 1=only if base domains match, 2=only if hosts match
+// controls whether or not to send a referrer across origins
+//   0 = (default) send the referrer in all cases
+//   1 = send a referrer only when the base domains are the same
+//   2 = send a referrer only on same-origin
 // Breakage: older modems/routers and some sites e.g banks, vimeo, icloud, instagram
 // If "2" is too strict, then override to "0" and use Smart Referer extension (Strict mode + add exceptions)
 user_pref("network.http.referer.XOriginPolicy", 2);
@@ -909,7 +955,7 @@ user_pref("network.http.referer.XOriginPolicy", 2);
 // 0=send full URI (default), 1=scheme+host+port+path, 2=scheme+host+port
 user_pref("network.http.referer.XOriginTrimmingPolicy", 2);
 
-user_pref("browser.newtabpage.activity-stream.telemetry", false);
+user_pref("browser.newtabpage.activity-stream.telemetry", false); // disable Firefox Home (Activity Stream) telemetry
 user_pref("browser.newtabpage.activity-stream.feeds.snippets", false); 
 user_pref("browser.newtabpage.activity-stream.showSponsored", false);
 user_pref("browser.newtabpage.activity-stream.default.sites", ""); // This does not block you from adding your own
@@ -921,14 +967,22 @@ user_pref("extensions.htmlaboutaddons.recommendations.enabled", false);
 // disable personalized Extension Recommendations in about:addons and AMO
 user_pref("browser.discovery.enabled", false);
 
-// Only cross-origin referers need control
-// user_pref("network.http.sendRefererHeader", 2);
-// user_pref("network.http.referer.trimmingPolicy", 0);
+//Only cross-origin referers need control
+//  controls whether or not to send a referrer regardless of origin
+//  0 = never send the header
+//  1 = send the header only when clicking on links and similar elements
+//  2 = (default) send on all requests (e.g. images, links, etc.)
+user_pref("network.http.sendRefererHeader", 0);
+//  controls how much referrer to send regardless of origin
+//  0 = (default) send the full URL
+//  1 = send the URL without its query string
+//  2 = only send the origin
+user_pref("network.http.referer.trimmingPolicy", 2);
 
-// set the default Referrer Policy
+// set the default referrer policy (which can be overriden by the site)
 // 0=no-referer, 1=same-origin, 2=strict-origin-when-cross-origin, 3=no-referrer-when-downgrade
-// user_pref("network.http.referer.defaultPolicy", 2); // [DEFAULT: 2]
-// user_pref("network.http.referer.defaultPolicy.pbmode", 2); // [DEFAULT: 2]
+user_pref("network.http.referer.defaultPolicy", 2); // [DEFAULT: 2]
+user_pref("network.http.referer.defaultPolicy.pbmode", 2); // [DEFAULT: 2]
 
 // disable HTTP Alternative Services
 // Already isolated with network partitioning
@@ -951,14 +1005,14 @@ user_pref("privacy.donottrackheader.enabled", true);
     user_pref("dom.webaudio.enabled", false);
 // disable other
    // user_pref("browser.display.use_document_fonts", 0);
-   // user_pref("browser.zoom.siteSpecific", false);
+    user_pref("browser.zoom.siteSpecific", false);
     user_pref("dom.w3c_touch_events.enabled", 0);
-   // user_pref("media.ondevicechange.enabled", false);
+    user_pref("media.ondevicechange.enabled", false);
    // user_pref("media.video_stats.enabled", false);
     user_pref("media.webspeech.synth.enabled", false);
-   // user_pref("webgl.enable-debug-renderer-info", false);
+    user_pref("webgl.enable-debug-renderer-info", false);
 // spoof
-   // user_pref("dom.maxHardwareConcurrency", 2);
+user_pref("dom.maxHardwareConcurrency", 2);
    // user_pref("font.system.whitelist", ""); // [HIDDEN PREF]
    // user_pref("general.appname.override", ""); // [HIDDEN PREF]
    // user_pref("general.appversion.override", ""); // [HIDDEN PREF]
@@ -997,6 +1051,11 @@ user_pref("privacy.donottrackheader.enabled", true);
 
 //disable SHA-1 certificates
 // user_pref("security.pki.sha1_enforcement_level", 1);
+
+// disable icon fonts (glyphs) and local fallback rendering
+// Breakage, font fallback is equivalency, also RFP
+   // user_pref("gfx.downloadable_fonts.enabled", false);
+   // user_pref("gfx.downloadable_fonts.fallback_delay", -1);
 /************************* END OF TITLE *******************************/
 
 
